@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { Container, Button, Typography, Paper, MenuItem, TextField } from '@mui/material';
+import { Container, Button, Typography, Paper, TextField } from '@mui/material';
 import { Controlled as CodeMirror } from 'react-codemirror2';
 import 'codemirror/lib/codemirror.css';
 import 'codemirror/theme/material.css';
@@ -12,13 +12,14 @@ import './App.css';
 
 function App() {
   const [code, setCode] = useState('');
-  const [language, setLanguage] = useState('html');
+  const [language, setLanguage] = useState('HTML'); // Padrão para HTML
   const [result, setResult] = useState('');
 
   const analyzeCode = async () => {
     try {
-      const response = await axios.post('http://localhost:3000/analyze', { code, language });
+      const response = await axios.post('http://localhost:3000/analyze', { code });
       setResult(response.data.analysis || 'Nenhum resultado de análise disponível.');
+      setLanguage(response.data.language); // Atualiza a linguagem detectada
     } catch (error) {
       console.error('Erro ao Analisar Código:', error);
       alert('Ocorreu um erro ao analisar o código. Verifique o console para mais detalhes.');
@@ -29,22 +30,18 @@ function App() {
     <Container>
       <Typography variant="h4" gutterBottom>CodeGuardian</Typography>
       <TextField
-        select
-        label="Linguagem"
+        label="Linguagem Detectada"
         value={language}
-        onChange={(e) => setLanguage(e.target.value)}
         fullWidth
         margin="normal"
-      >
-        <MenuItem value="javascript">JavaScript</MenuItem>
-        <MenuItem value="python">Python</MenuItem>
-        <MenuItem value="html">HTML</MenuItem>
-        <MenuItem value="css">CSS</MenuItem>
-      </TextField>
+        InputProps={{
+          readOnly: true,
+        }}
+      />
       <CodeMirror
         value={code}
         options={{
-          mode: language,
+          mode: language.toLowerCase(),
           theme: 'material',
           lineNumbers: true
         }}
