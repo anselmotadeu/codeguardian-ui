@@ -32,25 +32,25 @@ function App() {
 
   const darkTheme = createTheme({
     palette: {
-      mode: 'dark',
-      primary: { main: '#1d4f91' },
-      secondary: { main: '#df4661' },
-      error: { main: '#f44336' }, // Cor para erros
-      background: { default: '#121212', paper: '#1d1d1d' },
-      text: { primary: '#ffffff' },
+      mode: "dark",
+      primary: { main: "#1d4f91" },
+      secondary: { main: "#df4661" },
+      error: { main: "#f44336" }, // Cor para erros
+      background: { default: "#121212", paper: "#1d1d1d" },
+      text: { primary: "#ffffff" },
     },
   });
-  
+
   const lightTheme = createTheme({
     palette: {
-      mode: 'light',
-      primary: { main: '#1d4f91' },
-      secondary: { main: '#df4661' },
-      error: { main: '#f44336' }, // Cor para erros
-      background: { default: '#ffffff', paper: '#f5f5f5' },
-      text: { primary: '#000000' },
+      mode: "light",
+      primary: { main: "#1d4f91" },
+      secondary: { main: "#df4661" },
+      error: { main: "#f44336" }, // Cor para erros
+      background: { default: "#ffffff", paper: "#f5f5f5" },
+      text: { primary: "#000000" },
     },
-  });  
+  });
 
   const handleThemeChange = () => {
     setDarkMode(!darkMode);
@@ -95,15 +95,19 @@ function App() {
         </Toolbar>
       </AppBar>
       <Container>
-        <TextField
-          label="Linguagem Detectada"
-          value={language}
-          fullWidth
-          margin="normal"
-          InputProps={{
-            readOnly: true,
-          }}
-        />
+      <Box style={{ height: code ? 'auto' : '56px', transition: 'height 0.3s' }}>
+  {code && (
+    <TextField
+      label="Linguagem Detectada"
+      value={language}
+      fullWidth
+      margin="normal"
+      InputProps={{
+        readOnly: true,
+      }}
+    />
+  )}
+</Box>
         <CodeMirror
           value={code}
           options={{
@@ -125,9 +129,11 @@ function App() {
           color="primary"
           onClick={analyzeCode}
           style={{ marginTop: "10px" }}
+          disabled={!code} // Desabilita o botão quando não há código
         >
           Analisar Código
         </Button>
+
         <Paper
           elevation={3}
           style={{ whiteSpace: "pre-wrap", marginTop: "20px", padding: "20px" }}
