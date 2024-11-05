@@ -32,15 +32,25 @@ function App() {
 
   const darkTheme = createTheme({
     palette: {
-      mode: "dark",
+      mode: 'dark',
+      primary: { main: '#1d4f91' },
+      secondary: { main: '#df4661' },
+      error: { main: '#f44336' }, // Cor para erros
+      background: { default: '#121212', paper: '#1d1d1d' },
+      text: { primary: '#ffffff' },
     },
   });
-
+  
   const lightTheme = createTheme({
     palette: {
-      mode: "light",
+      mode: 'light',
+      primary: { main: '#1d4f91' },
+      secondary: { main: '#df4661' },
+      error: { main: '#f44336' }, // Cor para erros
+      background: { default: '#ffffff', paper: '#f5f5f5' },
+      text: { primary: '#000000' },
     },
-  });
+  });  
 
   const handleThemeChange = () => {
     setDarkMode(!darkMode);
