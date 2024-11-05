@@ -22,6 +22,7 @@ import "codemirror/mode/javascript/javascript";
 import "codemirror/mode/python/python";
 import "codemirror/mode/css/css";
 import "./App.css";
+import { Link } from 'react-router-dom';
 
 function App() {
   const [code, setCode] = useState("");
@@ -67,9 +68,12 @@ function App() {
       <CssBaseline />
       <AppBar position="static">
         <Toolbar>
-          <Typography variant="h6" style={{ flexGrow: 1 }}>
-            CodeGuardian
-          </Typography>
+        <Link to="/" style={{ textDecoration: 'none', color: 'inherit' }}>
+  <Typography variant="h6" style={{ flexGrow: 0 }}>
+    CodeGuardian
+  </Typography>
+</Link>
+
           <Box className="menu">
             <Button color="inherit">Configurações de Lint</Button>
             <Button color="inherit">Exportar Resultados</Button>
