@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { AppBar, Toolbar, Typography, Container, Button, Paper, TextField } from '@mui/material';
+import { AppBar, Toolbar, Typography, Container, Button, Paper, TextField, Box } from '@mui/material';
 import { Controlled as CodeMirror } from 'react-codemirror2';
 import 'codemirror/lib/codemirror.css';
 import 'codemirror/theme/material.css';
@@ -30,13 +30,18 @@ function App() {
     <>
       <AppBar position="static">
         <Toolbar>
-          <Typography variant="h6">
+          <Typography variant="h6" style={{ flexGrow: 0 }}>
             CodeGuardian
           </Typography>
+          <Box style={{ display: 'flex', flexGrow: 1, justifyContent: 'center' }}>
+            <Button color="inherit">Configurações de Lint</Button>
+            <Button color="inherit">Exportar Resultados</Button>
+            <Button color="inherit">Histórico de Análises</Button>
+            <Button color="inherit">Sobre</Button>
+          </Box>
         </Toolbar>
       </AppBar>
       <Container>
-        <Typography variant="h4" gutterBottom>CodeGuardian</Typography>
         <TextField
           label="Linguagem Detectada"
           value={language}
