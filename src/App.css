@@ -21,7 +21,8 @@ textarea {
   margin-top: 10px;
 }
 
-select, button {
+select,
+button {
   margin-top: 10px;
   padding: 10px;
   font-size: 16px;
@@ -37,4 +38,133 @@ pre {
   display: flex;
   justify-content: center;
   width: 100%;
+}
+
+@media (max-width: 768px) {
+
+  /* Estilos para tablets */
+  h1 {
+    font-size: 1.5rem;
+  }
+
+  .menu {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  textarea {
+    height: 120px;
+  }
+
+  select,
+  button {
+    width: 100%;
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+
+  /* Estilos para smartphones */
+  h1 {
+    font-size: 1.2rem;
+  }
+
+  /* Garantir que o texto do menu seja visível */
+  .menu button {
+    color: inherit;
+  }
+
+  .menu {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  textarea {
+    height: 100px;
+  }
+
+  select,
+  button {
+    width: 100%;
+    font-size: 12px;
+  }
+}
+
+/* Ajuste o menu hambúrguer para o canto direito */
+.hamburger-menu {
+  display: none;
+  position: absolute;
+  right: 10px;
+  top: 10px;
+}
+
+/* Exibe o menu hambúrguer em dispositivos móveis */
+@media (max-width: 768px) {
+  .menu {
+    display: none;
+  }
+
+  .hamburger-menu {
+    display: block;
+  }
+}
+
+/* Esconde o menu hambúrguer em dispositivos maiores */
+@media (min-width: 769px) {
+  .hamburger-menu {
+    display: none;
+  }
+}
+
+.hamburger-content {
+  display: none;
+  position: absolute;
+  top: 56px;
+  /* Ajuste conforme necessário */
+  right: 10px;
+  /* Ajuste conforme necessário */
+  background-color: #fff;
+  /* Ajuste conforme o tema */
+  color: #000;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  padding: 10px;
+  border-radius: 4px;
+}
+
+.hamburger-content button {
+  color: inherit;
+}
+
+.hamburger-content.show {
+  display: block;
+}
+
+/* Adicionando estilos para os botões dentro do menu hambúrguer */
+.hamburger-content button {
+  display: block;
+  width: 100%;
+  text-align: left;
+  padding: 10px;
+  border: none;
+  background: none;
+  color: inherit;
+  cursor: pointer;
+}
+
+/* Exibir o botão de troca de tema fora do menu hambúrguer em dispositivos maiores */
+.switch-container {
+  display: flex;
+  align-items: center;
+  margin-left: auto;
+  /* Alinha à direita */
+}
+
+@media (max-width: 768px) {
+
+  /* Esconder o botão de troca de tema fora do menu hambúrguer em dispositivos móveis */
+  .switch-container {
+    display: none;
+  }
 }

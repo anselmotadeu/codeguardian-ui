@@ -29,6 +29,7 @@ function App() {
   const [language, setLanguage] = useState("HTML"); // Padrão para HTML
   const [result, setResult] = useState("");
   const [darkMode, setDarkMode] = useState(false);
+  const [hamburgerOpen, setHamburgerOpen] = useState(false);
 
   const darkTheme = createTheme({
     palette: {
@@ -54,6 +55,7 @@ function App() {
 
   const handleThemeChange = () => {
     setDarkMode(!darkMode);
+    document.body.classList.toggle("dark-mode", !darkMode);
   };
 
   const analyzeCode = async () => {
@@ -71,6 +73,10 @@ function App() {
         "Ocorreu um erro ao analisar o código. Verifique o console para mais detalhes."
       );
     }
+  };
+
+  const toggleHamburgerMenu = () => {
+    setHamburgerOpen(!hamburgerOpen);
   };
 
   return (
@@ -91,23 +97,50 @@ function App() {
             <Button color="inherit">Sobre</Button>
           </Box>
 
-          <Switch checked={darkMode} onChange={handleThemeChange} />
+          <Box className="switch-container">
+            <Switch checked={darkMode} onChange={handleThemeChange} />
+          </Box>
+
+          <Box className="hamburger-menu">
+            <Button color="inherit" onClick={toggleHamburgerMenu}>
+              ☰
+            </Button>
+            <Box className={`hamburger-content ${hamburgerOpen ? "show" : ""}`}>
+              <Button color="inherit" onClick={toggleHamburgerMenu}>
+                Configurações de Lint
+              </Button>
+              <Button color="inherit" onClick={toggleHamburgerMenu}>
+                Exportar Resultados
+              </Button>
+              <Button color="inherit" onClick={toggleHamburgerMenu}>
+                Histórico de Análises
+              </Button>
+              <Button color="inherit" onClick={toggleHamburgerMenu}>
+                Sobre
+              </Button>
+              <Box>
+                <Switch checked={darkMode} onChange={handleThemeChange} />
+              </Box>
+            </Box>
+          </Box>
         </Toolbar>
       </AppBar>
       <Container>
-      <Box style={{ height: code ? 'auto' : '56px', transition: 'height 0.3s' }}>
-  {code && (
-    <TextField
-      label="Linguagem Detectada"
-      value={language}
-      fullWidth
-      margin="normal"
-      InputProps={{
-        readOnly: true,
-      }}
-    />
-  )}
-</Box>
+        <Box
+          style={{ height: code ? "auto" : "56px", transition: "height 0.3s" }}
+        >
+          {code && (
+            <TextField
+              label="Linguagem Detectada"
+              value={language}
+              fullWidth
+              margin="normal"
+              InputProps={{
+                readOnly: true,
+              }}
+            />
+          )}
+        </Box>
         <CodeMirror
           value={code}
           options={{
